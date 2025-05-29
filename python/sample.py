@@ -19,7 +19,7 @@ class GameCore(RetroCore):
     def __init__(self):
         super().__init__(320, 200, 60)
         font = pygame.font.SysFont("Arial", 64, bold=True)
-        self.text = font.render("Libretro core in Python. Press Tab key or Left or Right joypad buttons.", True, (192, 96, 96))
+        self.text = font.render("Libretro core in Python. Press Tab key or Left/Right joypad buttons.", True, (192, 96, 96))
         self.offset = self.width // 2
         self.delta = -4
 
@@ -49,9 +49,13 @@ class GameCore(RetroCore):
                 case RetroKey.RETROK_TAB:
                     self.delta = -self.delta
 
-# Standalone launch
+# Standalone mode
 
 class Game(GameCore):
+    joypadMap = {
+        pygame.K_LEFT: RetroKey.JOYPAD_LEFT,
+        pygame.K_RIGHT: RetroKey.JOYPAD_RIGHT
+    }
     keyMap = {
         pygame.K_TAB: RetroKey.RETROK_TAB
     }
@@ -77,10 +81,22 @@ class Game(GameCore):
                 case pygame.QUIT:
                     self.running = False
                 case pygame.KEYDOWN:
-                    try:
-                        self.keyboardEvent(self.keyMap[event.key], True, 0, 0)
-                    except KeyError:
-                        pass
+                    self.handleKeydown(event.key)
+
+    def handleKeydown(self, key: int):
+        if key == pygame.K_ESCAPE:
+            self.running = False
+            return
+
+        button = self.joypadMap.get(key)
+        if button is not None:
+            self.joypadEvent(0, button, True)
+            return
+
+        key = self.keyMap.get(key)
+        if key is not None:
+            self.keyboardEvent(key, True, 0, 0)
+            return
 
 if __name__ == "__main__":
     game = Game()
