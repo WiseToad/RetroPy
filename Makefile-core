@@ -1,0 +1,13 @@
+include Makefile-common.inc
+
+TARGET_linux = retropy_libretro.so
+TARGET_windows = retropy_libretro.dll
+
+SOURCE = pyretrolog.cpp retropy.cpp common/config.cpp common/logger.cpp libretro/libretro.cpp libretro/retrolog.cpp
+
+INCLUDE = -Isrc -Isrc/common -Isrc/libretro -Ilibretro-common/include $(shell python3-config --includes)
+
+LIBS = $(shell python3-config --ldflags)
+LNKFLAGS = -shared
+
+include Makefile-build.inc
