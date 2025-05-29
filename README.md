@@ -33,7 +33,7 @@ In fact, only `libretro-common/inclide/libretro.h` file used.
   make
   ```
 
-Place just built `retropy_libretro.so` library into standard directory with libretro cores.
+Copy `retropy_libretro.so` file from `build/` directory into standard directory containing libretro cores.
 You may pick this directory from RetroArch settings, as a hint.
 
 Place `RetroPy.conf` file into `RetroPy/` subdirectory of libretro system directory (again, look for it in RetroArch settings).
