@@ -44,5 +44,5 @@ Then change `pythonLib` configuration parameter in this file to actual Python li
 The most smooth approach to develop libretro core in Python is to subclass `RetroCore` class
 and use `RetroKey` constants provided in `python/` directory of this repo.
 
-See `sample.py` for an example how to do this. Example is able to run both as a libretro core
+See `sample.py` for an example how to do this. Example can be launched both as a libretro core
 and as a standalone Python "game".
