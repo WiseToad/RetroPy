@@ -36,7 +36,7 @@ In fact, only `libretro-common/inclide/libretro.h` file used.
 Copy `retropy_libretro.so` file from `build/` directory into standard directory containing libretro cores.
 You may pick this directory from RetroArch settings, as a hint.
 
-Place `RetroPy.conf` file into `RetroPy/` subdirectory of libretro system directory (again, look for it in RetroArch settings).
+Place `RetroPy.conf` file from this repo into `RetroPy/` subdirectory of libretro system directory (again, look for it in RetroArch settings).
 Then change `pythonLib` configuration parameter in this file to actual Python library location for your system.
 
 #### USAGE
