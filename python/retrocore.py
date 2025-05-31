@@ -1,12 +1,18 @@
+from pygame import Surface, BufferProxy
 import pygame
 
 class RetroCore:
-    surface: pygame.Surface
+    surface: Surface
     __fps: int
 
-    def __init__(self, width: int, height: int, fps: int):
+    def __init__(self, target: tuple[int, int] | Surface, fps: int):
         pygame.init()
-        self.surface = pygame.Surface((width, height), depth=32)
+        if isinstance(target, Surface):
+            self.surface = target
+        elif target is not None:
+            self.surface = Surface(target, depth=32)
+        else:
+            self.surface = None
         self.__fps = fps
 
     def __del__(self):
@@ -27,7 +33,7 @@ class RetroCore:
     def fps(self) -> int:
         return self.__fps
 
-    def nextFrame(self) -> pygame.BufferProxy:
+    def nextFrame(self) -> BufferProxy:
         return self.surface.get_view()
 
     def joypadEvent(self, num: int, button: int, pressed: bool):

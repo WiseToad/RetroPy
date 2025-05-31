@@ -16,10 +16,15 @@ class GameCore(RetroCore):
     offset: int
     delta: int
 
-    def __init__(self):
-        super().__init__(320, 200, 60)
+    def __init__(self, standalone: bool = False):
+        super().__init__(None, 60)
+
+        size = (320, 200)
+        self.surface = pygame.display.set_mode(size) if standalone else pygame.Surface(size, depth=32)
+
         font = pygame.font.SysFont("Arial", 64, bold=True)
         self.text = font.render("Libretro core in Python. Press Tab key or Left/Right joypad buttons.", True, (192, 96, 96))
+
         self.offset = self.width // 2
         self.delta = -4
 
@@ -62,16 +67,14 @@ class Game(GameCore):
 
     running: bool
 
-    def run(self):
-        print(f"Starting demo")
-        size = (self.width, self.height)
-        screen = pygame.display.set_mode(size)
+    def __init__(self):
+        super().__init__(True)
 
+    def run(self):
         self.running = True
         while self.running:
             self.handleEvents()
             self.nextFrame()
-            screen.blit(self.surface, (0, 0))
             pygame.display.flip()
             time.sleep(1 / self.fps)
 
