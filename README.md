@@ -33,6 +33,8 @@ In fact, only `libretro-common/inclide/libretro.h` file used.
   make
   ```
 
+#### INSTALL
+
 Copy `retropy_libretro.so` file from `build/` directory into standard directory containing libretro cores.
 You may pick this directory from RetroArch settings, as a hint.
 
